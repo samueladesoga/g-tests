@@ -1,0 +1,15 @@
+{
+  "name": "g-tests",
+  "version": "1.0.0",
+  "description": "Sample cypress test suite",
+  "main": "cypress.config.js",
+  "dependencies": {},
+  "devDependencies": {
+    "cypress": "^12.17.3"
+  },
+  "scripts": {
+    "test": "cypress run"
+  },
+  "author": "",
+  "license": "ISC"
+}
