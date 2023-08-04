@@ -1,8 +1,5 @@
-//import CompareBasket from '../pages/CompareBasket';
-    Cypress.on('uncaught:exception', (err) => {
-      console.log('Cypress detected uncaught exception: ', err);
-      return false;
-    });
+import {CompareBasketComponent} from '../pages/CompareBasketComponent';
+import {ListingsPage} from '../pages/ListingsPage';
 
 describe('crm software compare page', () => {
   beforeEach(() => {
@@ -10,11 +7,11 @@ describe('crm software compare page', () => {
   })
 
   it('displays compare basket button', () => {
-    //const compareBasket = new CompareBasket();
-    cy.get('div[data-testid=appbar_compare-basket_button] span').should('have.text', 0)
-    cy.get('div[data-testid=appbar_compare-basket_button] span').click()
-    cy.get('div[data-testid=compare-basket]').should('be.visible')
-    //expect(compareBasket.isDisplayed()).to.be.true
-    //expect(compareBasket.basketEmpty()).to.be.true
+    const compareBasket = new CompareBasketComponent();
+    const listingsPage = new ListingsPage();
+    listingsPage.getItemsInCompareBasket().should('have.text', 0)
+    listingsPage.launchCompareBasket()
+    compareBasket.getWrapper().should('be.visible')
+    compareBasket.getCompareBasketAddButtons().should("have.length", 4)
   })
 })

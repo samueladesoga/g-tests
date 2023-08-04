@@ -8,7 +8,8 @@
     "cypress": "^12.17.3"
   },
   "scripts": {
-    "test": "cypress run --headed"
+    "test-headed": "cypress run --headed",
+    "test": "cypress run"
   },
   "author": "",
   "license": "ISC"
