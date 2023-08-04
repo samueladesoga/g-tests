@@ -6,7 +6,7 @@ describe('crm software compare page', () => {
     cy.visit('/crm')
   })
 
-  it('displays compare basket button', () => {
+  it('displays an empty compare basket when launched', () => {
     const compareBasket = new CompareBasketComponent();
     const listingsPage = new ListingsPage();
     listingsPage.getItemsInCompareBasket().should('have.text', 0)
