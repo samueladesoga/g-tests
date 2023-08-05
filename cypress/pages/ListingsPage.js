@@ -18,6 +18,10 @@ export class ListingsPage{
         this.elements.listingItem().eq(nth).find('button[data-testid="listing-item_compare_cta"]').click()
    }
 
+   getCompareButtonForNthItem(nth){
+        return this.elements.listingItem().eq(nth).find('button[data-testid="listing-item_compare_cta"]')
+   }
+
    //getTitleForNthItem(nth) {
     //    return this.elements.listingItem().eq(nth).find('a[data-testid="listing-item_text-link_product-name"]')
    //}
