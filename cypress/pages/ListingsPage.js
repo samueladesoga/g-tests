@@ -6,13 +6,21 @@ export class ListingsPage{
        compareBasketIcon : () => cy.get('div[data-testid="appbar_compare-basket_button"] i'),
    }
 
-   launchCompareBasket()
-   {
+   launchCompareBasket() {
        this.elements.compareBasketIcon().click()
    }
 
-   getItemsInCompareBasket(){
+   getItemsInCompareBasket() {
         return this.elements.itemsInCompareBasket()
    }
+
+   addNthItemToCompareBasket(nth) {
+        this.elements.listingItem().eq(nth).find('button[data-testid="listing-item_compare_cta"]').click()
+   }
+
+   //getTitleForNthItem(nth) {
+    //    return this.elements.listingItem().eq(nth).find('a[data-testid="listing-item_text-link_product-name"]')
+   //}
+
 
 }
