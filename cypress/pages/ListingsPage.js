@@ -1,5 +1,9 @@
 export class ListingsPage{
 
+    constructor() {
+       cy.visit('/crm')
+    }
+
    elements = { 
        listingItem : () => cy.get('div[data-testid="listing-item"]'),
        itemsInCompareBasket : () =>  cy.get('div[data-testid="appbar_compare-basket_button"] span'),
