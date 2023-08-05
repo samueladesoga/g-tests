@@ -11,7 +11,8 @@ export class ListingsPage{
    }
 
    locators = {
-        listingItemCompareButton: 'button[data-testid="listing-item_compare_cta"]'
+        listingItemCompareButton: 'button[data-testid="listing-item_compare_cta"]',
+        listingItemProductName: 'a[data-testid="listing-item_text-link_product-name"] h2'
    }
 
    launchCompareBasket() {
@@ -31,7 +32,7 @@ export class ListingsPage{
    }
 
    getTitleForNthItem(nth) {
-        return this.elements.listingItem().eq(nth).find('a[data-testid="listing-item_text-link_product-name"] h2')
+        return this.elements.listingItem().eq(nth).find(this.locators.listingItemProductName)
    }
 
 }

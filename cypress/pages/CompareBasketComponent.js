@@ -5,6 +5,11 @@ export class CompareBasketComponent {
        compareBasketWrapper : () => cy.get('div[data-testid=compare-basket]'),
    }
 
+    locators = {
+        compareProductButton: 'div[data-evac=compare-basket_add-product]',
+        compareBasketItemTitle: 'button[data-evla=compare-basket_item] p.Typography'
+   }
+
    getWrapper()
    {
      return this.elements.compareBasketWrapper()
@@ -12,12 +17,12 @@ export class CompareBasketComponent {
 
    getCompareBasketAddButtons()
    {
-       return this.getWrapper().find('div[data-evac=compare-basket_add-product]')
+       return this.getWrapper().find(this.locators.compareProductButton)
    }
 
    getTitleForNthItemInCompareBasket(nth)
    {
-       return this.getWrapper().find('button[data-evla=compare-basket_item] p.Typography').eq(nth)
+       return this.getWrapper().find(this.locators.compareBasketItemTitle).eq(nth)
    }
 
 }
