@@ -24,9 +24,12 @@ describe('crm software compare page', () => {
   })
 
   it('click on compare item adds item to compare basket', () => {
+    let listingTitle = listingsPage.getTitleForNthItem(0)
     listingsPage.addNthItemToCompareBasket(0)
     compareBasket.getWrapper().should('be.visible')
     compareBasket.getCompareBasketAddButtons().should("have.length", 3)
+    let itemTitleInCompareBasket = compareBasket.getTitleForNthItemInCompareBasket(0)
+    cy.compareTextFromElements(listingTitle, itemTitleInCompareBasket)
     listingsPage.getItemsInCompareBasket().should('have.text', 1)
   })
 
@@ -43,6 +46,6 @@ describe('crm software compare page', () => {
     listingsPage.addNthItemToCompareBasket(2)
     listingsPage.addNthItemToCompareBasket(3)
     listingsPage.getItemsInCompareBasket().should('have.text', 4)
-    listingsPage.getCompareButtonForNthItem(5).should('be.disabled')
+    listingsPage.getCompareButtonForNthItem(4).should('be.disabled')
   })
 })

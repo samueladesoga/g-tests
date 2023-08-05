@@ -15,4 +15,13 @@ export class CompareBasketComponent {
        return this.getWrapper().find('div[data-evac=compare-basket_add-product]')
    }
 
+   getTitleForNthItemInCompareBasket(nth)
+   {
+       return this.getWrapper().find('button[data-evla=compare-basket_item] p.Typography').eq(nth)
+   }
+
 }
+
+
+
+

@@ -6,6 +6,10 @@ export class ListingsPage{
        compareBasketIcon : () => cy.get('div[data-testid="appbar_compare-basket_button"] i'),
    }
 
+   locators = {
+        listingItemCompareButton: 'button[data-testid="listing-item_compare_cta"]'
+   }
+
    launchCompareBasket() {
        this.elements.compareBasketIcon().click()
    }
@@ -15,16 +19,15 @@ export class ListingsPage{
    }
 
    addNthItemToCompareBasket(nth) {
-        this.elements.listingItem().eq(nth).find('button[data-testid="listing-item_compare_cta"]').click()
+        this.elements.listingItem().eq(nth).find(this.locators.listingItemCompareButton).click()
    }
 
    getCompareButtonForNthItem(nth){
-        return this.elements.listingItem().eq(nth).find('button[data-testid="listing-item_compare_cta"]')
+        return this.elements.listingItem().eq(nth).find(this.locators.listingItemCompareButton)
    }
 
-   //getTitleForNthItem(nth) {
-    //    return this.elements.listingItem().eq(nth).find('a[data-testid="listing-item_text-link_product-name"]')
-   //}
-
+   getTitleForNthItem(nth) {
+        return this.elements.listingItem().eq(nth).find('a[data-testid="listing-item_text-link_product-name"] h2')
+   }
 
 }
