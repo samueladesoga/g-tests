@@ -30,7 +30,7 @@ describe('CRM Software Listing Page', () => {
 	    })
 
 
-	    it.only('The page should contain a table of content', () => { 
+	    it.only('The buyers guide should be displayed as table of content for SEO', () => { 
 	    	cy.get('a[data-evac=jump-to_category_all-products_guide]').click()
 	    	cy.scrollTo('bottom')
 	    	cy.get('a[data-evac=jump-to_category_all-products_guide]').click()
