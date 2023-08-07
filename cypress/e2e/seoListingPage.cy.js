@@ -32,8 +32,9 @@ describe('CRM Software Listing Page', () => {
 
 	    it.only('The page should contain a table of content', () => { 
 	    	cy.get('a[data-evac=jump-to_category_all-products_guide]').click()
+	    	cy.scrollTo('bottom')
 	    	cy.get('a[data-evac=jump-to_category_all-products_guide]').click()
-	    	let toc = cy.get('div[data-testid=buyers-guide] div.TableOfContent', { timeout: 60000 }).find('a')
+	    	let toc = cy.get('div[data-testid=buyers-guide] div.TableOfContent', { timeout: 30000 }).find('a')
 	    	toc.should('have.length.least', 1)
 	    })
     })
