@@ -1,11 +1,13 @@
-export class ListingsPage{
+import {Page} from './Page';
+export class ListingsPage extends Page{
 
     constructor() {
+       super();
        cy.visit('/crm')
     }
 
    elements = { 
-       listingItem : () => cy.get('div[data-testid="listing-item"]'),
+       listingItems : () => cy.get('div[data-testid="listing-item"]'),
        itemsInCompareBasket : () =>  cy.get('div[data-testid="appbar_compare-basket_button"] span'),
        compareBasketIcon : () => cy.get('div[data-testid="appbar_compare-basket_button"] i'),
        buyersGuideLink: () => cy.get('a[data-evac=jump-to_category_all-products_guide]'),
@@ -14,7 +16,12 @@ export class ListingsPage{
 
    locators = {
         listingItemCompareButton: 'button[data-testid="listing-item_compare_cta"]',
-        listingItemProductName: 'a[data-testid="listing-item_text-link_product-name"] h2'
+        listingItemProductName: 'a[data-testid="listing-item_text-link_product-name"] h2',
+        listingItemProductLogo: 'a[data-testid=listing-item_logo_product] img',
+   }
+
+   getListingItems() {
+        return this.elements.listingItems()
    }
 
    launchCompareBasket() {
@@ -26,19 +33,15 @@ export class ListingsPage{
    }
 
    addNthItemToCompareBasket(nth) {
-        this.elements.listingItem().eq(nth).find(this.locators.listingItemCompareButton).click()
+        this.elements.listingItems().eq(nth).find(this.locators.listingItemCompareButton).click()
    }
 
    getCompareButtonForNthItem(nth){
-        return this.elements.listingItem().eq(nth).find(this.locators.listingItemCompareButton)
+        return this.elements.listingItems().eq(nth).find(this.locators.listingItemCompareButton)
    }
 
    getTitleForNthItem(nth) {
-        return this.elements.listingItem().eq(nth).find(this.locators.listingItemProductName)
-   }
-
-   getPageTitle(){
-     return cy.title()
+        return this.elements.listingItems().eq(nth).find(this.locators.listingItemProductName)
    }
 
    goToBuyersGuide(){
@@ -50,5 +53,13 @@ export class ListingsPage{
 
    getBuyersGuideLinks(){
      return this.elements.buyersGuideToCLinks()
+   }
+
+   getProductNameForListItemElement(listingItemRow){
+     return cy.wrap(listingItemRow).find(this.locators.listingItemProductName)
+   }
+
+   getAltTextForListItemElement(listingItemRow){
+     return cy.wrap(listingItemRow).find(this.locators.listingItemProductLogo).invoke('attr', 'alt')
    }
 }

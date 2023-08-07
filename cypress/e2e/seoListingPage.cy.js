@@ -13,23 +13,22 @@ describe('CRM Software Listing Page', () => {
 	        listingsPage = new ListingsPage()
 	    })
 
-	    it('every image on the page should have an alt text that is short and meaningful', () => {  
-	    	let listingItems = cy.get('div[data-testid=listing-item]')
+	    it('Every image on the page should have an alt text that is short and related to the product name', () => {  
+	    	let listingItems = listingsPage.getListingItems()
 	    	listingItems.each(($listingItem) => {
-	    		let a = cy.wrap($listingItem).find('a[data-testid=listing-item_text-link_product-name] h2')
-	    		let b = cy.wrap($listingItem).find('a[data-testid=listing-item_logo_product] img').invoke('attr', 'alt')
-	    		a.invoke('text').then(($text) => {
-      				b.should('eq', `${$text} logo`)
+	    		let productName = listingsPage.getProductNameForListItemElement($listingItem)
+	    		let altText = listingsPage.getAltTextForListItemElement($listingItem)
+	    		productName.invoke('text').then(($productName) => {
+      				altText.should('eq', `${$productName} logo`)
       			})
 	    	})
 
 	    })
 
-	    it('page title should be displayed and relevant to the page content', () => { 
+	    it('Page title should be displayed and relevant to the page content', () => { 
 	    	let expectedPageTitle = 'Best CRM Software 2023 - Reviews on 771+ Tools | GetApp'
 	      	listingsPage.getPageTitle().should('eq', expectedPageTitle)
 	    })
-
 
 	    it('The buyers guide should be displayed as table of content for SEO', () => { 
 	    	listingsPage.goToBuyersGuide()
