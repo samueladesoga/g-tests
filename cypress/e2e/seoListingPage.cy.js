@@ -25,16 +25,15 @@ describe('CRM Software Listing Page', () => {
 
 	    })
 
-	    it('page title should be displayed and relevant to the page content', () => {  
-	      cy.title().should('eq', 'Best CRM Software 2023 - Reviews on 771+ Tools | GetApp')
+	    it('page title should be displayed and relevant to the page content', () => { 
+	    	let expectedPageTitle = 'Best CRM Software 2023 - Reviews on 771+ Tools | GetApp'
+	      	listingsPage.getPageTitle().should('eq', expectedPageTitle)
 	    })
 
 
 	    it('The buyers guide should be displayed as table of content for SEO', () => { 
-	    	cy.get('a[data-evac=jump-to_category_all-products_guide]').click()
-	    	cy.scrollTo('bottom')
-	    	cy.get('a[data-evac=jump-to_category_all-products_guide]').click()
-	    	let toc = cy.get('div[data-testid=buyers-guide] div.TableOfContent', { timeout: 30000 }).find('a')
+	    	listingsPage.goToBuyersGuide()
+	    	let toc = listingsPage.getBuyersGuideLinks()
 	    	toc.should('have.length.least', 1)
 	    })
     })
