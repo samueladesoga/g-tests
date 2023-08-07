@@ -1,9 +1,11 @@
 import {Page} from './Page';
-export class ListingsPage extends Page{
+import {ListingItemComponent} from './ListingItemComponent'
+export class ListingsPage extends Page {
 
     constructor() {
        super();
        cy.visit('/crm')
+       this.listingItemComponent = new ListingItemComponent('div[data-testid="listing-item"]')
     }
 
    elements = { 
@@ -16,12 +18,6 @@ export class ListingsPage extends Page{
 
    locators = {
         listingItemCompareButton: 'button[data-testid="listing-item_compare_cta"]',
-        listingItemProductName: 'a[data-testid="listing-item_text-link_product-name"] h2',
-        listingItemProductLogo: 'a[data-testid=listing-item_logo_product] img',
-   }
-
-   getListingItems() {
-        return this.elements.listingItems()
    }
 
    launchCompareBasket() {
@@ -30,18 +26,6 @@ export class ListingsPage extends Page{
 
    getItemsInCompareBasket() {
         return this.elements.itemsInCompareBasket()
-   }
-
-   addNthItemToCompareBasket(nth) {
-        this.elements.listingItems().eq(nth).find(this.locators.listingItemCompareButton).click()
-   }
-
-   getCompareButtonForNthItem(nth){
-        return this.elements.listingItems().eq(nth).find(this.locators.listingItemCompareButton)
-   }
-
-   getTitleForNthItem(nth) {
-        return this.elements.listingItems().eq(nth).find(this.locators.listingItemProductName)
    }
 
    goToBuyersGuide(){
@@ -53,13 +37,5 @@ export class ListingsPage extends Page{
 
    getBuyersGuideLinks(){
      return this.elements.buyersGuideToCLinks()
-   }
-
-   getProductNameForListItemElement(listingItemRow){
-     return cy.wrap(listingItemRow).find(this.locators.listingItemProductName)
-   }
-
-   getAltTextForListItemElement(listingItemRow){
-     return cy.wrap(listingItemRow).find(this.locators.listingItemProductLogo).invoke('attr', 'alt')
    }
 }

@@ -30,7 +30,7 @@ describe('CRM Software Listing Page', () => {
 
       context('When I click on compare for the first listing on the page', () => {
         beforeEach(() => {
-          listingsPage.addNthItemToCompareBasket(0)
+          listingsPage.listingItemComponent.addNthItemToCompareBasket(0)
         })
         
         it('Then the first listing should be the only listing displayed in the compare basket', () => {  
@@ -40,7 +40,7 @@ describe('CRM Software Listing Page', () => {
         })
 
         it('And the title of the listing should match the title added in the compare basket', () => { 
-          let listingTitle = listingsPage.getTitleForNthItem(0) 
+          let listingTitle = listingsPage.listingItemComponent.getTitleForNthItem(0) 
           let itemTitleInCompareBasket = compareBasket.getTitleForNthItemInCompareBasket(0)
           cy.compareTextFromElements(listingTitle, itemTitleInCompareBasket)
         })
@@ -48,9 +48,9 @@ describe('CRM Software Listing Page', () => {
 
       context('When I click on the compare item for an already added item', () => {
         beforeEach(() => {
-          listingsPage.addNthItemToCompareBasket(0)
+          listingsPage.listingItemComponent.addNthItemToCompareBasket(0)
           listingsPage.getItemsInCompareBasket().should('have.text', 1)
-          listingsPage.addNthItemToCompareBasket(0)
+          listingsPage.listingItemComponent.addNthItemToCompareBasket(0)
         })
 
         it('Then the item should be removed from the compare basket', () => {  
@@ -60,15 +60,15 @@ describe('CRM Software Listing Page', () => {
 
       context('When I have added 4 items in to  the compare basket', () => {
         beforeEach(() => {
-          listingsPage.addNthItemToCompareBasket(0)
-          listingsPage.addNthItemToCompareBasket(1)
-          listingsPage.addNthItemToCompareBasket(2)
-          listingsPage.addNthItemToCompareBasket(3)
+          listingsPage.listingItemComponent.addNthItemToCompareBasket(0)
+          listingsPage.listingItemComponent.addNthItemToCompareBasket(1)
+          listingsPage.listingItemComponent.addNthItemToCompareBasket(2)
+          listingsPage.listingItemComponent.addNthItemToCompareBasket(3)
         })
 
         it('Then the compare button for the other items in the list page should be disabled', () => {  
           listingsPage.getItemsInCompareBasket().should('have.text', 4)
-          listingsPage.getCompareButtonForNthItem(4).should('be.disabled')
+          listingsPage.listingItemComponent.getCompareButtonForNthItem(4).should('be.disabled')
         })
       })
     })

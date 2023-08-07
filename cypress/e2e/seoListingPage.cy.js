@@ -4,7 +4,8 @@ Cypress.on('uncaught:exception', (err, runnable) => {
     return false
 })
 
-import {ListingsPage} from '../pages/ListingsPage';
+import {ListingsPage} from '../pages/ListingsPage'
+import {ListingItemComponent} from '../pages/ListingItemComponent'
 
 describe('CRM Software Listing Page', () => {
   let listingsPage
@@ -14,10 +15,10 @@ describe('CRM Software Listing Page', () => {
 	    })
 
 	    it('Every image on the page should have an alt text that is short and related to the product name', () => {  
-	    	let listingItems = listingsPage.getListingItems()
+	    	let listingItems = listingsPage.listingItemComponent.getAllListingItems()
 	    	listingItems.each(($listingItem) => {
-	    		let productName = listingsPage.getProductNameForListItemElement($listingItem)
-	    		let altText = listingsPage.getAltTextForListItemElement($listingItem)
+	    		let productName = listingsPage.listingItemComponent.getProductNameForListItemElement($listingItem)
+	    		let altText = listingsPage.listingItemComponent.getAltTextForListItemElement($listingItem)
 	    		productName.invoke('text').then(($productName) => {
       				altText.should('eq', `${$productName} logo`)
       			})
